@@ -1,0 +1,31 @@
+huffman — build and run on Windows
+==================================
+
+You need a GCC for Windows first (once only). Easiest way:
+
+1. Install MSYS2 from https://www.msys2.org
+2. Open the "MSYS2 MinGW 64-bit" terminal and run:
+   pacman -S mingw-w64-x86_64-gcc
+3. Add C:\msys64\mingw64\bin to your PATH (or just run the commands
+   below from the "MSYS2 MinGW 64-bit" terminal).
+
+Alternative: download a standalone MinGW-w64 build from
+https://winlibs.com, unzip it, and add its bin folder to your PATH.
+
+Check it works (Command Prompt or PowerShell):
+  gcc --version
+
+Build (in the folder containing huffman.c):
+  gcc -O2 -o huffman.exe huffman.c
+
+Run:
+  huffman.exe compress story.txt story.huff
+  huffman.exe decompress story.huff story.out
+
+Both commands print three lines: the original size, the compressed
+size, and the ratio. A ratio below 100 means the file shrank; above
+100 (small or already-compressed files) means it grew, which is normal
+for this tool — the 2065-byte header alone is bigger than a tiny file.
+
+The .huff format is the tool's own: only this program can decompress
+its own .huff files.
